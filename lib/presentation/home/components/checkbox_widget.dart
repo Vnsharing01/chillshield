@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CheckboxWidget extends StatelessWidget {
@@ -16,12 +15,14 @@ class CheckboxWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
         Row(
           children: checkboxes,
-        )
+        ),
       ],
     );
   }

@@ -32,7 +32,7 @@ class BtnCheckbox extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: Container(
             decoration: BoxDecoration(
-              color: !selected ? AppClolors.primary : AppClolors.secondary,
+              color: !selected ? AppClolors.checkboxBg : AppClolors.selected,
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(

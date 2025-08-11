@@ -1,3 +1,4 @@
+import 'package:chillshield/presentation/home/home_binding.dart';
 import 'package:chillshield/presentation/home/home_screen.dart';
 import 'package:chillshield/routes/app_routes.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'shillShield',
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.initialRoute,
+      initialBinding: HomeBinding(),
       getPages: AppRoutes.routes,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

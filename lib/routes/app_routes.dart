@@ -1,3 +1,4 @@
+import 'package:chillshield/presentation/home/home_binding.dart';
 import 'package:chillshield/presentation/home/home_screen.dart';
 import 'package:chillshield/presentation/setting/setting_screen.dart';
 import 'package:chillshield/routes/route_name.dart';
@@ -12,8 +13,9 @@ class AppRoutes {
     // ),
     GetPage(
       name: RouteName.home,
-      page: () => const HomeScreen(),
+      page: () =>  const HomeScreen(),
       transition: Transition.fadeIn,
+      binding: HomeBinding(),
     ),
     // GetPage(
     //   name: '/play',
@@ -21,7 +23,7 @@ class AppRoutes {
     // ),
     GetPage(
       name: RouteName.settings,
-      page: () => const SettingScreen(),
+      page: () =>  const SettingScreen(),
       transition: Transition.rightToLeftWithFade
     ),
   ];

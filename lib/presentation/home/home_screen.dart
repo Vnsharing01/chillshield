@@ -1,6 +1,7 @@
 import 'package:chillshield/presentation/home/components/checkbox_widget.dart';
 import 'package:chillshield/presentation/home/home_controller.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/constants/app_image.dart';
 import 'package:chillshield/widgets/checkbox_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,63 +13,60 @@ class HomeScreen extends GetWidget<HomeController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          extendBody: true,
-          extendBodyBehindAppBar: true,
-          backgroundColor: AppClolors.background,
-          body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 24,
-            ),
-            child: Column(
-              children: [
-                Text(
-                  'Welcome to ChillShield',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 16),
-                const CircleAvatar(
-                  radius: 64,
-                  backgroundColor: AppClolors.primary,
-                  child: Icon(
-                    Icons.policy,
-                    size: 36,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                frequencyWidget(controller),
-                const SizedBox(height: 16),
-                typeOfInsectWidget(controller),
-                const SizedBox(height: 16),
-                timeWidget(controller),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle button press
-                  },
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    backgroundColor: AppClolors.btnBackground,
-                  ),
-                  child: const Text(
-                    'START',
-                    style: TextStyle(
-                      fontSize: 24,
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        backgroundColor: AppClolors.background,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 24,
+          ),
+          child: Column(
+            children: [
+              Text(
+                'Welcome to ChillShield',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppClolors.white,
                     ),
+              ),
+              const SizedBox(height: 16),
+              Image.asset(
+                AppImage.logo,
+                fit: BoxFit.contain,
+                height: 100,
+                width: 100,
+              ),
+              const SizedBox(height: 16),
+              frequencyWidget(controller),
+              const SizedBox(height: 16),
+              typeOfInsectWidget(controller),
+              const SizedBox(height: 16),
+              timeWidget(controller),
+              const SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle button press
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: AppClolors.btnBackground,
+                ),
+                child: const Text(
+                  'START',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppClolors.white,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      
+      ),
     );
   }
 

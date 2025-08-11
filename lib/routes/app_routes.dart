@@ -1,5 +1,8 @@
 import 'package:chillshield/presentation/home/home_binding.dart';
 import 'package:chillshield/presentation/home/home_screen.dart';
+import 'package:chillshield/presentation/play/play_binding.dart';
+import 'package:chillshield/presentation/play/play_screen.dart';
+import 'package:chillshield/presentation/setting/setting_binding.dart';
 import 'package:chillshield/presentation/setting/setting_screen.dart';
 import 'package:chillshield/routes/route_name.dart';
 import 'package:get/get.dart';
@@ -13,18 +16,20 @@ class AppRoutes {
     // ),
     GetPage(
       name: RouteName.home,
-      page: () =>  const HomeScreen(),
-      transition: Transition.fadeIn,
+      page: () => const HomeScreen(),
       binding: HomeBinding(),
+      transition: Transition.fadeIn,
     ),
-    // GetPage(
-    //   name: '/play',
-    //   page: () => PlayScreen(),
-    // ),
     GetPage(
-      name: RouteName.settings,
-      page: () =>  const SettingScreen(),
-      transition: Transition.rightToLeftWithFade
+      name: '/play',
+      page: () => const PlayScreen(),
+      binding: PlayBinding(),
+      transition: Transition.rightToLeftWithFade,
     ),
+    GetPage(
+        name: RouteName.settings,
+        page: () => const SettingScreen(),
+        binding: SettingBinding(),
+        transition: Transition.rightToLeftWithFade),
   ];
 }

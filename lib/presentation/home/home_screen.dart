@@ -1,7 +1,9 @@
 import 'package:chillshield/presentation/home/components/checkbox_widget.dart';
 import 'package:chillshield/presentation/home/home_controller.dart';
+import 'package:chillshield/routes/route_name.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
 import 'package:chillshield/shared/constants/app_image.dart';
+import 'package:chillshield/widgets/app_button.dart';
 import 'package:chillshield/widgets/checkbox_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +16,20 @@ class HomeScreen extends GetWidget<HomeController> {
     return SafeArea(
       child: Scaffold(
         extendBody: true,
-        extendBodyBehindAppBar: true,
         backgroundColor: AppClolors.background,
+        appBar: AppBar(
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'ChillShield',
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  color: AppClolors.txtMainColor,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
@@ -43,25 +57,11 @@ class HomeScreen extends GetWidget<HomeController> {
               const SizedBox(height: 16),
               timeWidget(controller),
               const SizedBox(height: 32),
-              ElevatedButton(
+              AppButton(
                 onPressed: () {
-                  // Handle button press
+                  Get.offNamed(RouteName.play);
                 },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  backgroundColor: AppClolors.btnBackground,
-                ),
-                child: const Text(
-                  'START',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppClolors.white,
-                  ),
-                ),
+                buttonTile: 'START',
               ),
             ],
           ),

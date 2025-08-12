@@ -27,9 +27,10 @@ class AppRoutes {
       transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
-        name: RouteName.settings,
-        page: () => const SettingScreen(),
-        binding: SettingBinding(),
-        transition: Transition.rightToLeftWithFade),
+      name: RouteName.settings,
+      page: () => const SettingScreen(),
+      binding: SettingBinding(),
+      transition: Transition.rightToLeftWithFade,
+    ),
   ];
 }

@@ -20,4 +20,10 @@ class HomeController extends GetxController {
   void setTimeSelectedValue(int value) {
     _timeSelectedValue.value = value;
   }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+  }
 }

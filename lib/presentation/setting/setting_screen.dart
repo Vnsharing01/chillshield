@@ -1,13 +1,10 @@
+import 'package:chillshield/presentation/setting/setting_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class SettingScreen extends StatefulWidget {
+class SettingScreen extends GetView<SettingController> {
   const SettingScreen({super.key});
 
-  @override
-  State<SettingScreen> createState() => _SettingScreenState();
-}
-
-class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();

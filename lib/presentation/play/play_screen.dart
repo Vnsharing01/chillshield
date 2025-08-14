@@ -20,9 +20,7 @@ class PlayScreen extends GetView<PlayController> {
           centerTitle: true,
           title: Text(
             'ChillShield',
-            style: AppTextStyle.title(
-              fontSize: 36
-            ),
+            style: AppTextStyle.title(fontSize: 36),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -112,7 +110,7 @@ class PlayScreen extends GetView<PlayController> {
           flex: 8,
           child: Text(
             info,
-            style: AppTextStyle.label(fontSize: 14),
+            style: AppTextStyle.label(fontSize: 16),
           ),
         ),
       ],

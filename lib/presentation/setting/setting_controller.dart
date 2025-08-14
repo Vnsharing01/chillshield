@@ -2,11 +2,13 @@ import 'package:get/get.dart';
 
 class SettingController extends GetxController {
   // Example observable variable
-  var isDarkMode = false.obs;
+  final RxBool _isDarkMode = false.obs;
+
+  bool get isDarkMode => _isDarkMode.value;
 
   // Example method to toggle dark mode
-  void toggleDarkMode() {
-    isDarkMode.value = !isDarkMode.value;
+  void toggleDarkMode(bool value) {
+    _isDarkMode.value = value;
   }
 
   @override

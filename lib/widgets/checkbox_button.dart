@@ -1,4 +1,5 @@
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
 class BtnCheckbox extends StatelessWidget {
@@ -42,10 +43,7 @@ class BtnCheckbox extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               text ?? '',
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTextStyle.label(),
             ),
           ),
         ),

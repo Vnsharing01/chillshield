@@ -3,7 +3,9 @@ import 'package:chillshield/presentation/home/home_controller.dart';
 import 'package:chillshield/routes/route_name.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
 import 'package:chillshield/shared/constants/app_image.dart';
+import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:chillshield/widgets/app_button.dart';
+import 'package:chillshield/widgets/app_icon_button.dart';
 import 'package:chillshield/widgets/checkbox_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,13 +24,16 @@ class HomeScreen extends GetWidget<HomeController> {
           automaticallyImplyLeading: false,
           title: Text(
             'ChillShield',
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  color: AppClolors.txtMainColor,
-                  fontWeight: FontWeight.bold,
-                ),
+            style: AppTextStyle.title(fontSize: 36),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          actions: [
+            AppIconButton(
+              onPressed: () => Get.toNamed(RouteName.settings),
+              icon: Icons.settings_rounded,
+            )
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
@@ -37,13 +42,6 @@ class HomeScreen extends GetWidget<HomeController> {
           ),
           child: Column(
             children: [
-              Text(
-                'Welcome to ChillShield',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              const SizedBox(height: 16),
               Image.asset(
                 AppImage.logo,
                 fit: BoxFit.contain,

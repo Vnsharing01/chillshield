@@ -11,4 +11,6 @@ class AppClolors {
   static const Color txtMainColor = Color(0xFF437B47);
 
   static const Color white = Color(0xFFFFFFFF);
+  static const Color textBlack = Color(0xFF000000);
+  static const Color label = Color(0xFF1F4325);
 }

@@ -1,3 +1,4 @@
+import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
 class CheckboxWidget extends StatelessWidget {
@@ -15,9 +16,9 @@ class CheckboxWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: AppTextStyle.label(
+            fontSize: 20,
+          ),
         ),
         const SizedBox(height: 8),
         Row(

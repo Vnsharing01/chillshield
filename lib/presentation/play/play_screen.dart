@@ -1,7 +1,7 @@
 import 'package:chillshield/presentation/play/play_controller.dart';
 import 'package:chillshield/routes/route_name.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
-import 'package:chillshield/shared/constants/app_image.dart';
+import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,10 +20,9 @@ class PlayScreen extends GetView<PlayController> {
           centerTitle: true,
           title: Text(
             'ChillShield',
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  color: AppClolors.txtMainColor,
-                  fontWeight: FontWeight.bold,
-                ),
+            style: AppTextStyle.title(
+              fontSize: 36
+            ),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -31,17 +30,16 @@ class PlayScreen extends GetView<PlayController> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 81,
-              backgroundColor: AppClolors.txtMainColor.withOpacity(0.2),
-              child: Image.asset(
-                AppImage.logo,
-                fit: BoxFit.contain,
-                height: 100,
-                width: 100,
+              backgroundColor: AppClolors.txtMainColor,
+              child: Icon(
+                Icons.volume_up_rounded,
+                size: 120,
+                color: AppClolors.white,
               ),
             ),
-            const SizedBox(height: 54),
+            const SizedBox(height: 32),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 54),
               child: AppButton(
@@ -58,52 +56,66 @@ class PlayScreen extends GetView<PlayController> {
                 vertical: 16,
               ),
               child: Material(
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
+                elevation: 1,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                color: AppClolors.selected,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
                           'Thông tin',
-                          style: const TextStyle(
+                          textAlign: TextAlign.center,
+                          style: AppTextStyle.label(
                             fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            color: AppClolors.label,
                           ),
                         ),
-                        Text(
-                          'Muỗi',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Muỗi',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Muỗi',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
+                      ),
+                      buildInfoView(title: 'Côn trùng', info: 'mosquito'),
+                      buildInfoView(title: 'Tần số', info: '120kHz'),
+                      buildInfoView(title: 'Thời gian', info: '1 giờ'),
+                    ],
+                  ),
+                ),
+              ),
             )
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildInfoView({
+    required String title,
+    required String info,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 4,
+          child: Text(
+            '$title: ',
+            textAlign: TextAlign.end,
+            style: AppTextStyle.body(fontSize: 16),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          flex: 8,
+          child: Text(
+            info,
+            style: AppTextStyle.label(fontSize: 14),
+          ),
+        ),
+      ],
     );
   }
 }

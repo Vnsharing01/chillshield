@@ -1,4 +1,5 @@
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
@@ -22,9 +23,8 @@ class AppButton extends StatelessWidget {
       ),
       child: Text(
         buttonTile,
-        style: const TextStyle(
+        style: AppTextStyle.button(
           fontSize: 24,
-          fontWeight: FontWeight.bold,
           color: AppClolors.white,
         ),
       ),

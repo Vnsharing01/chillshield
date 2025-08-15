@@ -67,16 +67,23 @@ class SettingScreen extends GetView<SettingController> {
                                       return AlertDialog(
                                         title: Text(
                                           'App Info',
+                                          textAlign: TextAlign.center,
                                           style:
                                               AppTextStyle.title(fontSize: 20),
                                         ),
                                         content: Text(
-                                          'This app is designed to help you manage your settings easily.',
+                                          '''ChillSheild sử dụng sóng âm tần số cao để hỗ trợ xua đuổi côn trùng như muỗi, gián, ruồi… giúp bạn tận hưởng không gian thoải mái hơn.\n
+⚠ Lưu ý khoa học:\n Hiệu quả của phương pháp đuổi côn trùng bằng tần số âm thanh vẫn đang được nghiên cứu và có thể khác nhau tùy môi trường, loài côn trùng và thiết bị phát. Ứng dụng không thay thế các biện pháp phòng chống côn trùng truyền thống!''',
                                           style:
                                               AppTextStyle.body(fontSize: 16),
                                         ),
                                         actionsAlignment:
                                             MainAxisAlignment.center,
+                                        actionsPadding:
+                                            const EdgeInsets.symmetric(
+                                          horizontal: 36,
+                                          vertical: 20,
+                                        ),
                                         actions: [
                                           AppButton(
                                             onPressed: () => Get.back(),
@@ -102,13 +109,12 @@ class SettingScreen extends GetView<SettingController> {
                                 SharePlus.instance.share(
                                   ShareParams(
                                     text:
-                                        'check out my website https://www.youtube.com/watch?v=ebYDOadpPcI',
-                                    // uri: Uri.parse(
-                                    //     'https://www.youtube.com/watch?v=ebYDOadpPcI'),
-
+                                        "Muỗi? Gián? Côn trùng? Không còn là vấn đề. \nĐêm nay ngủ ngon, không còn tiếng vo ve 🛡️ \nDùng thử ngay: https://www.youtube.com/watch?v=ebYDOadpPcI",
                                     // rest of params
                                     excludedCupertinoActivities: [
-                                      CupertinoActivityType.postToFacebook
+                                      CupertinoActivityType.postToFacebook,
+                                      CupertinoActivityType.postToTwitter,
+                                      CupertinoActivityType.message,
                                     ],
                                   ),
                                 );

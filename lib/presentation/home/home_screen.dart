@@ -1,7 +1,6 @@
 import 'package:chillshield/presentation/home/components/checkbox_widget.dart';
 import 'package:chillshield/presentation/home/home_controller.dart';
 import 'package:chillshield/routes/route_name.dart';
-import 'package:chillshield/shared/constants/app_clolors.dart';
 import 'package:chillshield/shared/constants/app_image.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:chillshield/widgets/app_button.dart';
@@ -18,7 +17,6 @@ class HomeScreen extends GetWidget<HomeController> {
     return SafeArea(
       child: Scaffold(
         extendBody: true,
-        backgroundColor: AppClolors.background,
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,

@@ -1,4 +1,3 @@
-import 'package:chillshield/presentation/home/home_binding.dart';
 import 'package:chillshield/routes/app_routes.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
 import 'package:flutter/material.dart';
@@ -20,13 +19,13 @@ class MyApp extends StatelessWidget {
       title: 'ChillShield',
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.initialRoute,
-      initialBinding: HomeBinding(),
       getPages: AppRoutes.routes,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppClolors.txtMainColor,
         ),
         scaffoldBackgroundColor: AppClolors.background,
+        primaryColor: AppClolors.primary,
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
             foregroundColor: AppClolors.txtMainColor,

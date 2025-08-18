@@ -15,7 +15,6 @@ class PlayScreen extends GetView<PlayController> {
       child: Scaffold(
         extendBody: true,
         extendBodyBehindAppBar: true,
-        backgroundColor: AppClolors.background,
         appBar: AppBar(
           centerTitle: true,
           title: Text(

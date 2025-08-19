@@ -1,3 +1,5 @@
+import 'package:chillshield/presentation/setting/components/item_info_widget.dart';
+import 'package:chillshield/presentation/setting/components/radio_check_audio_widget.dart';
 import 'package:chillshield/presentation/setting/setting_controller.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
@@ -40,8 +42,21 @@ class SettingScreen extends GetView<SettingController> {
                       Expanded(
                         child: Column(
                           children: [
+                            ItemInfoWidget(
+                              controller: controller,
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) {
+                                      return _buildAudioPopup();
+                                    });
+                              },
+                              title: 'Âm thanh nền',
+                              icon: Icons.chevron_right_rounded,
+                            ),
                             _buildDividerView(),
-                            ListTile(
+                            ItemInfoWidget(
+                              controller: controller,
                               onTap: () {
                                 showDialog(
                                     context: context,
@@ -49,26 +64,15 @@ class SettingScreen extends GetView<SettingController> {
                                       return _buildInfoPopup();
                                     });
                               },
-                              title: Text(
-                                'App info',
-                                style: AppTextStyle.label(fontSize: 20),
-                              ),
-                              trailing: const Icon(
-                                Icons.info,
-                                color: AppClolors.txtMainColor,
-                              ),
+                              title: 'App info',
+                              icon: Icons.info,
                             ),
                             _buildDividerView(),
-                            ListTile(
+                            ItemInfoWidget(
+                              controller: controller,
                               onTap: () => controller.shareApp(),
-                              title: Text(
-                                'Share App',
-                                style: AppTextStyle.label(fontSize: 20),
-                              ),
-                              trailing: const Icon(
-                                Icons.share,
-                                color: AppClolors.txtMainColor,
-                              ),
+                              title: 'Share App',
+                              icon: Icons.share,
                             ),
                             _buildDividerView(),
                           ],
@@ -90,7 +94,7 @@ class SettingScreen extends GetView<SettingController> {
     );
   }
 
-  AlertDialog _buildInfoPopup() {
+  Widget _buildInfoPopup() {
     return AlertDialog(
       title: Text(
         'App Info',
@@ -110,9 +114,65 @@ class SettingScreen extends GetView<SettingController> {
       actions: [
         AppButton(
           onPressed: () => Get.back(),
-          buttonTile: 'Close',
+          buttonTile: 'Đóng',
         ),
       ],
+    );
+  }
+
+  Widget _buildAudioPopup() {
+    final controller = Get.find<SettingController>();
+    return Obx(
+      () => Dialog.fullscreen(
+        backgroundColor: AppClolors.background,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Âm thanh nền',
+                style: AppTextStyle.title(fontSize: 24),
+              ),
+              const SizedBox(height: 24),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _buildDividerView(),
+                    RadioCheckAudioWidget(
+                      text: 'Tiếng suối chảy',
+                      value: 1,
+                      selectedValue: controller.isAudioValue,
+                      onTap: controller.toggleAudio,
+                    ),
+                    _buildDividerView(),
+                    RadioCheckAudioWidget(
+                      text: 'Tiếng mưa rơi',
+                      value: 2,
+                      selectedValue: controller.isAudioValue,
+                      onTap: controller.toggleAudio,
+                    ),
+                    _buildDividerView(),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: AppButton(
+                  onPressed: () => Get.back(),
+                  buttonTile: 'Chọn',
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

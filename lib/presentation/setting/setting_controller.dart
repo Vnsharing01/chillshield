@@ -2,10 +2,17 @@ import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 
 class SettingController extends GetxController {
+  final _isAudiValue = 1.obs;
+
+  int get isAudioValue => _isAudiValue.value;
   @override
   void onClose() {
     // TODO: implement onClose
     super.onClose();
+  }
+
+  void toggleAudio(int value) {
+    _isAudiValue.value = value;
   }
 
   void shareApp() {

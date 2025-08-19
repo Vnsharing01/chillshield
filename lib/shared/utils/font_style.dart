@@ -13,6 +13,6 @@ String fontLabelFamily() => GoogleFonts.nunitoSans(
       fontWeight: FontWeight.w600,
     ).fontFamily!;
 
-String fontButtonFamily() => GoogleFonts.poppins(
-      fontWeight: FontWeight.w600,
+String fontButtonFamily() => GoogleFonts.quicksand(
+      fontWeight: FontWeight.w700,
     ).fontFamily!;

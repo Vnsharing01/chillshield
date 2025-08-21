@@ -2,6 +2,7 @@ import 'package:chillshield/presentation/setting/components/item_info_widget.dar
 import 'package:chillshield/presentation/setting/components/radio_check_audio_widget.dart';
 import 'package:chillshield/presentation/setting/setting_controller.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:flutter/material.dart';
@@ -146,14 +147,14 @@ class SettingScreen extends GetView<SettingController> {
                     _buildDividerView(),
                     RadioCheckAudioWidget(
                       text: 'Tiếng suối chảy',
-                      value: 1,
+                      value: BackgroundSoundEnum.stream,
                       selectedValue: controller.isAudioValue,
                       onTap: controller.toggleAudio,
                     ),
                     _buildDividerView(),
                     RadioCheckAudioWidget(
                       text: 'Tiếng mưa rơi',
-                      value: 2,
+                      value: BackgroundSoundEnum.rain,
                       selectedValue: controller.isAudioValue,
                       onTap: controller.toggleAudio,
                     ),

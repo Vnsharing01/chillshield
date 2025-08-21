@@ -1,11 +1,17 @@
 import 'package:chillshield/routes/app_routes.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/constants/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Future.delayed(const Duration(seconds: 3));
+
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
+  getIt.registerSingleton<SharedPreferences>(preferences);
+
+  await Future.delayed(const Duration(seconds: 2));
   runApp(const MyApp());
 }
 

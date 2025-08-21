@@ -1,7 +1,14 @@
+import 'package:chillshield/data/models/ultrasonic_model.dart';
 import 'package:chillshield/presentation/home/components/checkbox_widget.dart';
 import 'package:chillshield/presentation/home/home_controller.dart';
 import 'package:chillshield/routes/route_name.dart';
 import 'package:chillshield/shared/constants/app_image.dart';
+import 'package:chillshield/shared/constants/get_it.dart';
+import 'package:chillshield/shared/constants/key_string.dart';
+import 'package:chillshield/shared/enums/background_sound_enum.dart';
+import 'package:chillshield/shared/enums/duration_enum.dart';
+import 'package:chillshield/shared/enums/frequency_enum.dart';
+import 'package:chillshield/shared/enums/insect_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:chillshield/widgets/app_icon_button.dart';
@@ -55,20 +62,39 @@ class HomeScreen extends GetWidget<HomeController> {
               const SizedBox(height: 32),
               AppButton(
                 onPressed: () {
-                  if (controller.frequencySelectedValue == 0) {
+                  if (controller.frequencySelectedValue ==
+                      FrequencyEnum.none.key) {
                     Get.snackbar(
                       'Bạn chưa chọn tần số',
                       'Vui lòng chọn tần số',
                       snackPosition: SnackPosition.TOP,
                     );
-                  } else if (controller.insectSelectedValue == 0) {
+                  } else if (controller.insectSelectedValue ==
+                      InsectEnum.none.key) {
                     Get.snackbar(
                       'Bạn chưa chọn loại côn trùng',
                       'Vui lòng chọn loại côn trùng',
                       snackPosition: SnackPosition.TOP,
                     );
                   } else {
-                    Get.offNamed(RouteName.play);
+                    Get.offNamed(
+                      RouteName.play,
+                      arguments: UltrasonicModel(
+                        backgroundSound: BackgroundSoundEnumExtension.fromName(
+                          preferences.getString(KeyString.backgroundSound) ??
+                              BackgroundSoundEnum.stream.name,
+                        ),
+                        insect: InsectExtension.fromKey(
+                          controller.insectSelectedValue,
+                        ),
+                        time: DurationEnumExtension.fromKey(
+                          controller.timeSelectedValue,
+                        ),
+                        frequency: FrequencyEnumExtension.fromKey(
+                          controller.frequencySelectedValue,
+                        ),
+                      ),
+                    );
                   }
                 },
                 buttonTile: 'START',
@@ -86,24 +112,24 @@ class HomeScreen extends GetWidget<HomeController> {
         title: 'Tần số',
         checkboxes: [
           BtnCheckbox(
-            value: 1,
+            value: FrequencyEnum.frequency20kHz.key,
             selectedValue: controller.frequencySelectedValue,
-            text: '20 kHz',
+            text: FrequencyEnum.frequency20kHz.name,
             onTap: controller.setFrequencySelectedValue,
             isEnabled: controller.insectSelectedValue != 2,
           ),
           const SizedBox(width: 10),
           BtnCheckbox(
-            value: 2,
+            value: FrequencyEnum.frequency30kHz.key,
             selectedValue: controller.frequencySelectedValue,
-            text: '30 kHz',
+            text: FrequencyEnum.frequency30kHz.name,
             onTap: controller.setFrequencySelectedValue,
           ),
           const SizedBox(width: 10),
           BtnCheckbox(
-            value: 3,
+            value: FrequencyEnum.frequency42kHz.key,
             selectedValue: controller.frequencySelectedValue,
-            text: '42 kHz',
+            text: FrequencyEnum.frequency42kHz.name,
             onTap: controller.setFrequencySelectedValue,
           ),
         ],
@@ -117,23 +143,23 @@ class HomeScreen extends GetWidget<HomeController> {
         title: 'Loại côn trùng',
         checkboxes: [
           BtnCheckbox(
-            value: 1,
+            value: InsectEnum.mosquito.key,
             selectedValue: controller.insectSelectedValue,
-            text: 'Muỗi',
+            text: InsectEnum.mosquito.name,
             onTap: controller.setInsectSelectedValue,
           ),
           const SizedBox(width: 10),
           BtnCheckbox(
-            value: 2,
+            value: InsectEnum.cockroach.key,
             selectedValue: controller.insectSelectedValue,
-            text: 'Gián',
+            text: InsectEnum.cockroach.name,
             onTap: controller.setInsectSelectedValue,
           ),
           const SizedBox(width: 10),
           BtnCheckbox(
-            value: 3,
+            value: InsectEnum.orther.key,
             selectedValue: controller.insectSelectedValue,
-            text: 'Khác',
+            text: InsectEnum.orther.name,
             onTap: controller.setInsectSelectedValue,
           ),
         ],
@@ -147,23 +173,23 @@ class HomeScreen extends GetWidget<HomeController> {
         title: 'Thời gian',
         checkboxes: [
           BtnCheckbox(
-            value: 1,
+            value: DurationEnum.fifteenMinute.key,
             selectedValue: controller.timeSelectedValue,
-            text: '15 phút',
+            text: DurationEnum.fifteenMinute.name,
             onTap: controller.setTimeSelectedValue,
           ),
           const SizedBox(width: 10),
           BtnCheckbox(
-            value: 2,
+            value: DurationEnum.thirtyMinute.key,
             selectedValue: controller.timeSelectedValue,
-            text: '30 phút',
+            text: DurationEnum.thirtyMinute.name,
             onTap: controller.setTimeSelectedValue,
           ),
           const SizedBox(width: 10),
           BtnCheckbox(
-            value: 3,
+            value: DurationEnum.oneHour.key,
             selectedValue: controller.timeSelectedValue,
-            text: '1 giờ',
+            text: DurationEnum.oneHour.name,
             onTap: controller.setTimeSelectedValue,
           ),
         ],

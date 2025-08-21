@@ -1,9 +1,12 @@
+import 'package:chillshield/shared/enums/duration_enum.dart';
+import 'package:chillshield/shared/enums/frequency_enum.dart';
+import 'package:chillshield/shared/enums/insect_enum.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final RxInt _frequencySelectedValue = 0.obs;
-  final RxInt _insectSelectedValue = 0.obs;
-  final RxInt _timeSelectedValue = 0.obs;
+  final RxInt _frequencySelectedValue = FrequencyEnum.none.key.obs;
+  final RxInt _insectSelectedValue = InsectEnum.none.key.obs;
+  final RxInt _timeSelectedValue = DurationEnum.fifteenMinute.key.obs;
 
   int get frequencySelectedValue => _frequencySelectedValue.value;
   int get insectSelectedValue => _insectSelectedValue.value;

@@ -1,3 +1,4 @@
+import 'package:chillshield/data/models/ultrasonic_model.dart';
 import 'package:chillshield/presentation/home/home_binding.dart';
 import 'package:chillshield/presentation/home/home_screen.dart';
 import 'package:chillshield/presentation/play/play_binding.dart';
@@ -10,10 +11,6 @@ import 'package:get/get.dart';
 class AppRoutes {
   static const initialRoute = RouteName.home;
   static final routes = [
-    // GetPage(
-    //   name: '/splash',
-    //   page: () => SplashScreen(),
-    // ),
     GetPage(
       name: RouteName.home,
       page: () => const HomeScreen(),
@@ -24,6 +21,7 @@ class AppRoutes {
       name: '/play',
       page: () => const PlayScreen(),
       binding: PlayBinding(),
+      arguments: UltrasonicModel,
       transition: Transition.rightToLeftWithFade,
     ),
     GetPage(

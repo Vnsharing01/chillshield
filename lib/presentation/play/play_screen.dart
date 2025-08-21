@@ -1,6 +1,7 @@
 import 'package:chillshield/presentation/play/play_controller.dart';
 import 'package:chillshield/routes/route_name.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:flutter/material.dart';
@@ -75,9 +76,23 @@ class PlayScreen extends GetView<PlayController> {
                           ),
                         ),
                       ),
-                      buildInfoView(title: 'Côn trùng', info: 'mosquito'),
-                      buildInfoView(title: 'Tần số', info: '120kHz'),
-                      buildInfoView(title: 'Thời gian', info: '1 giờ'),
+                      buildInfoView(
+                        title: 'Côn trùng',
+                        info: '${controller.model.insect?.name}',
+                      ),
+                      buildInfoView(
+                        title: 'Tần số',
+                        info: '${controller.model.frequency?.title}',
+                      ),
+                      buildInfoView(
+                        title: 'Thời gian',
+                        info: '${controller.model.time?.title}',
+                      ),
+                      buildInfoView(
+                        title: 'Nhạc nền',
+                        info:
+                            '${controller.model.backgroundSound?.displayName}',
+                      ),
                     ],
                   ),
                 ),

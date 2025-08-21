@@ -1,4 +1,5 @@
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +12,10 @@ class RadioCheckAudioWidget extends StatefulWidget {
     required this.selectedValue,
   });
 
-  final void Function(int value)? onTap;
+  final void Function(BackgroundSoundEnum value)? onTap;
   final String? text;
-  final int value;
-  final int selectedValue;
+  final BackgroundSoundEnum value;
+  final BackgroundSoundEnum selectedValue;
 
   @override
   State<RadioCheckAudioWidget> createState() => _RadioCheckAudioWidgetState();

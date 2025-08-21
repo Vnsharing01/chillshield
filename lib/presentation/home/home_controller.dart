@@ -14,6 +14,9 @@ class HomeController extends GetxController {
   }
 
   void setInsectSelectedValue(int value) {
+    if (value == 2 && _frequencySelectedValue.value == 1) {
+      _frequencySelectedValue.value = value;
+    }
     _insectSelectedValue.value = value;
   }
 

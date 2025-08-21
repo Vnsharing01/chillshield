@@ -55,7 +55,21 @@ class HomeScreen extends GetWidget<HomeController> {
               const SizedBox(height: 32),
               AppButton(
                 onPressed: () {
-                  Get.offNamed(RouteName.play);
+                  if (controller.frequencySelectedValue == 0) {
+                    Get.snackbar(
+                      'Bạn chưa chọn tần số',
+                      'Vui lòng chọn tần số',
+                      snackPosition: SnackPosition.TOP,
+                    );
+                  } else if (controller.insectSelectedValue == 0) {
+                    Get.snackbar(
+                      'Bạn chưa chọn loại côn trùng',
+                      'Vui lòng chọn loại côn trùng',
+                      snackPosition: SnackPosition.TOP,
+                    );
+                  } else {
+                    Get.offNamed(RouteName.play);
+                  }
                 },
                 buttonTile: 'START',
               ),
@@ -74,21 +88,22 @@ class HomeScreen extends GetWidget<HomeController> {
           BtnCheckbox(
             value: 1,
             selectedValue: controller.frequencySelectedValue,
-            text: '50 kHz',
+            text: '20 kHz',
             onTap: controller.setFrequencySelectedValue,
+            isEnabled: controller.insectSelectedValue != 2,
           ),
           const SizedBox(width: 10),
           BtnCheckbox(
             value: 2,
             selectedValue: controller.frequencySelectedValue,
-            text: '60 kHz',
+            text: '30 kHz',
             onTap: controller.setFrequencySelectedValue,
           ),
           const SizedBox(width: 10),
           BtnCheckbox(
             value: 3,
             selectedValue: controller.frequencySelectedValue,
-            text: '120 kHz',
+            text: '42 kHz',
             onTap: controller.setFrequencySelectedValue,
           ),
         ],
@@ -118,7 +133,7 @@ class HomeScreen extends GetWidget<HomeController> {
           BtnCheckbox(
             value: 3,
             selectedValue: controller.insectSelectedValue,
-            text: 'Ruồi',
+            text: 'Khác',
             onTap: controller.setInsectSelectedValue,
           ),
         ],

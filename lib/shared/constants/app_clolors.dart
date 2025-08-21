@@ -14,4 +14,5 @@ class AppClolors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color textBlack = Color(0xFF000000);
   static const Color label = Color(0xFF1F4325);
+  static const Color buttonDisabled = Color(0xFFD0D5D0);
 }

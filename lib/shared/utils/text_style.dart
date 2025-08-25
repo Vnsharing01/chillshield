@@ -8,7 +8,7 @@ class AppTextStyle {
     Color? color,
   }) =>
       TextStyle(
-        fontSize: fontSize,
+        fontSize: fontSize ?? 36,
         color: color ?? AppClolors.txtMainColor,
         fontFamily: fontTitleFamily(),
       );

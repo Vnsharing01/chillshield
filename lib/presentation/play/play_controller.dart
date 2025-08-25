@@ -4,15 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 
-class PlayController extends GetxController {
+class PlayController extends GetxController{
   // Add your controller variables and methods here
   late final UltrasonicModel model;
 
-  // Example observable variable
   final _isPlaying = false.obs;
   bool get isPlaying => _isPlaying.value;
 
-  AudioPlayer audioPlayer = AudioPlayer();
+  final audioPlayer = AudioPlayer();
 
   @override
   void onInit() {

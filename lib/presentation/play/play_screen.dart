@@ -1,3 +1,4 @@
+import 'package:chillshield/presentation/play/components/duration_widget.dart';
 import 'package:chillshield/presentation/play/play_controller.dart';
 import 'package:chillshield/routes/route_name.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
@@ -31,11 +32,7 @@ class PlayScreen extends GetView<PlayController> {
             const CircleAvatar(
               radius: 81,
               backgroundColor: AppClolors.txtMainColor,
-              child: Icon(
-                Icons.volume_up_rounded,
-                size: 120,
-                color: AppClolors.white,
-              ),
+              child: DurationWidget(),
             ),
             const SizedBox(height: 32),
             Padding(

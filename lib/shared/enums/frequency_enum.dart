@@ -64,4 +64,17 @@ extension FrequencyEnumExtension on FrequencyEnum {
         return FrequencyEnum.none;
     }
   }
+
+  static FrequencyEnum fromName(String title) {
+    switch (title) {
+      case '20 kHz':
+        return FrequencyEnum.frequency20kHz;
+      case '30 kHz':
+        return FrequencyEnum.frequency30kHz;
+      case '42 kHz':
+        return FrequencyEnum.frequency42kHz;
+      default:
+        return FrequencyEnum.none;
+    }
+  }
 }

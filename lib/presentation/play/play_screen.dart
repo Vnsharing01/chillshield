@@ -43,6 +43,7 @@ class PlayScreen extends GetView<PlayController> {
               child: AppButton(
                 onPressed: () {
                   Get.offNamed(RouteName.home);
+                  controller.stop();
                 },
                 buttonTile: 'STOP',
               ),

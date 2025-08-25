@@ -2,7 +2,13 @@ import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/enums/duration_enum.dart';
 import 'package:chillshield/shared/enums/frequency_enum.dart';
 import 'package:chillshield/shared/enums/insect_enum.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'ultrasonic_model.g.dart';
+
+@JsonSerializable()
+@CopyWith()
 class UltrasonicModel {
   final BackgroundSoundEnum? backgroundSound;
   final InsectEnum? insect;
@@ -16,21 +22,8 @@ class UltrasonicModel {
     this.frequency,
   });
 
-  factory UltrasonicModel.fromJson(Map<String, dynamic> json) {
-    return UltrasonicModel(
-      backgroundSound: json['backgroundSound'] as BackgroundSoundEnum,
-      insect: json['insect'] as InsectEnum,
-      time: json['time'] as DurationEnum,
-      frequency: json['frequency'] as FrequencyEnum,
-    );
-  }
+  factory UltrasonicModel.fromJson(Map<String, dynamic> json) =>
+      _$UltrasonicModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'backgroundSound': backgroundSound?.name,
-      'insect': insect,
-      'time': time,
-      'frequency': frequency?.name,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UltrasonicModelToJson(this);
 }

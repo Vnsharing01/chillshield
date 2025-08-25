@@ -1,3 +1,5 @@
+import 'package:chillshield/shared/enums/background_sound_enum.dart';
+import 'package:chillshield/shared/enums/frequency_enum.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -26,6 +28,12 @@ class SoundModels extends HiveObject {
     this.soundPath,
     this.frequency,
   });
+
+  BackgroundSoundEnum get isBackgroundSound =>
+      BackgroundSoundEnumExtension.fromName(
+          soundType ?? BackgroundSoundEnum.stream.name);
+  FrequencyEnum get isFrequency =>
+      FrequencyEnumExtension.fromName(frequency ?? FrequencyEnum.none.title);
 
   factory SoundModels.fromJson(Map<String, dynamic> json) =>
       _$SoundModelsFromJson(json);

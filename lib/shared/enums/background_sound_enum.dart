@@ -13,9 +13,26 @@ extension BackgroundSoundEnumExtension on BackgroundSoundEnum {
     }
   }
 
-  static BackgroundSoundEnum fromName(String name) {
+  String get name {
+    switch (this) {
+      case BackgroundSoundEnum.rain:
+        return 'Rain';
+      case BackgroundSoundEnum.stream:
+        return 'Stream';
+    }
+  }
+
+  static BackgroundSoundEnum fromdisplayName(String name) {
     switch (name) {
       case 'Tiếng Mưa':
+        return BackgroundSoundEnum.rain;
+      default:
+        return BackgroundSoundEnum.stream;
+    }
+  }
+  static BackgroundSoundEnum fromName(String name) {
+    switch (name) {
+      case 'Rain':
         return BackgroundSoundEnum.rain;
       default:
         return BackgroundSoundEnum.stream;

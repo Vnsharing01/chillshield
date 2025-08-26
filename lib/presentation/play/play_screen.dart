@@ -1,6 +1,5 @@
 import 'package:chillshield/presentation/play/components/duration_widget.dart';
 import 'package:chillshield/presentation/play/play_controller.dart';
-import 'package:chillshield/routes/route_name.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
 import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
@@ -13,90 +12,99 @@ class PlayScreen extends GetView<PlayController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        extendBody: true,
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'ChillShield',
-            style: AppTextStyle.title(fontSize: 36),
+    return Obx(
+      () => SafeArea(
+        child: Scaffold(
+          extendBody: true,
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              'ChillShield',
+              style: AppTextStyle.title(fontSize: 36),
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
           ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CircleAvatar(
-              radius: 81,
-              backgroundColor: AppClolors.txtMainColor,
-              child: DurationWidget(),
-            ),
-            const SizedBox(height: 32),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 54),
-              child: AppButton(
-                onPressed: () {
-                  Get.offNamed(RouteName.home);
-                  controller.stop();
-                },
-                buttonTile: 'STOP',
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 16,
-              ),
-              child: Material(
-                elevation: 1,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 81,
+                backgroundColor: AppClolors.txtMainColor,
+                child: DurationWidget(
+                  duration:
+                      Duration(minutes: controller.model.time?.value ?? 0),
+                  isPlaying: controller.isPlaying,
                 ),
-                color: AppClolors.selected,
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Text(
-                          'Thông tin',
-                          textAlign: TextAlign.center,
-                          style: AppTextStyle.label(
-                            fontSize: 20,
-                            color: AppClolors.label,
+              ),
+              const SizedBox(height: 32),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 54),
+                child: AppButton(
+                  onPressed: () {
+                    if (controller.isPlaying) {
+                      controller.pause();
+                    } else {
+                      controller.play();
+                    }
+                  },
+                  buttonTile: controller.isPlaying ? 'Pause' : 'Start',
+                ),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
+                child: Material(
+                  elevation: 1,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  color: AppClolors.selected,
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Text(
+                            'Thông tin',
+                            textAlign: TextAlign.center,
+                            style: AppTextStyle.label(
+                              fontSize: 20,
+                              color: AppClolors.label,
+                            ),
                           ),
                         ),
-                      ),
-                      buildInfoView(
-                        title: 'Côn trùng',
-                        info: '${controller.model.insect?.name}',
-                      ),
-                      buildInfoView(
-                        title: 'Tần số',
-                        info: '${controller.model.frequency?.title}',
-                      ),
-                      buildInfoView(
-                        title: 'Thời gian',
-                        info: '${controller.model.time?.title}',
-                      ),
-                      buildInfoView(
-                        title: 'Nhạc nền',
-                        info:
-                            '${controller.model.backgroundSound?.displayName}',
-                      ),
-                    ],
+                        buildInfoView(
+                          title: 'Côn trùng',
+                          info: '${controller.model.insect?.name}',
+                        ),
+                        buildInfoView(
+                          title: 'Tần số',
+                          info: '${controller.model.frequency?.title}',
+                        ),
+                        buildInfoView(
+                          title: 'Thời gian',
+                          info: '${controller.model.time?.title}',
+                        ),
+                        buildInfoView(
+                          title: 'Nhạc nền',
+                          info:
+                              '${controller.model.backgroundSound?.displayName}',
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

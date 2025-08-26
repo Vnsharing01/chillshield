@@ -77,7 +77,7 @@ class HomeScreen extends GetWidget<HomeController> {
                       snackPosition: SnackPosition.TOP,
                     );
                   } else {
-                    Get.offNamed(
+                    Get.toNamed(
                       RouteName.play,
                       arguments: UltrasonicModel(
                         backgroundSound: BackgroundSoundEnumExtension.fromName(

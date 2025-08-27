@@ -1,6 +1,7 @@
 import 'package:chillshield/presentation/play/components/duration_widget.dart';
 import 'package:chillshield/presentation/play/play_controller.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/constants/key_string.dart';
 import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:chillshield/widgets/app_button.dart';
@@ -12,6 +13,13 @@ class PlayScreen extends GetView<PlayController> {
 
   @override
   Widget build(BuildContext context) {
+    // controller.addListener(
+    //   () {
+    //     if (KeyString.durationKey.currentState!.duration <= Duration.zero) {
+    //       controller.stop();
+    //     }
+    //   },
+    // );
     return Obx(
       () => SafeArea(
         child: Scaffold(
@@ -33,6 +41,7 @@ class PlayScreen extends GetView<PlayController> {
                 radius: 81,
                 backgroundColor: AppClolors.txtMainColor,
                 child: DurationWidget(
+                  key: KeyString.durationKey,
                   duration:
                       Duration(minutes: controller.model.time?.value ?? 0),
                   isPlaying: controller.isPlaying,
@@ -45,8 +54,10 @@ class PlayScreen extends GetView<PlayController> {
                   onPressed: () {
                     if (controller.isPlaying) {
                       controller.pause();
+                      KeyString.durationKey.currentState?.pause();
                     } else {
                       controller.play();
+                      KeyString.durationKey.currentState?.resume();
                     }
                   },
                   buttonTile: controller.isPlaying ? 'Pause' : 'Start',

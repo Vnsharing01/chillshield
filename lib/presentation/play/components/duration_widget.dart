@@ -7,27 +7,34 @@ class DurationWidget extends StatefulWidget {
   const DurationWidget({
     super.key,
     this.duration = Duration.zero,
-    this.isPlaying = true,
+    this.isPlaying = false,
   });
   final Duration duration;
   final bool isPlaying;
 
   @override
-  State<DurationWidget> createState() => _DurationWidgetState();
+  State<DurationWidget> createState() => DurationWidgetState();
 }
 
-class _DurationWidgetState extends State<DurationWidget>
+class DurationWidgetState extends State<DurationWidget>
     with TickerProviderStateMixin {
   late final AnimationController animationController;
+
+  double _pausedValue = 0;
+  Duration duration = Duration.zero;
 
   @override
   void initState() {
     animationController = AnimationController(
       vsync: this,
-      duration: Duration.zero,
+      duration: widget.duration,
     );
+    _pausedValue = animationController.value;
     animationController.addListener(
-      () => widget.isPlaying ? setState(() {}) : animationController.stop,
+      () {
+        duration = widget.duration * animationController.value;
+        setState(() {});
+      },
     );
 
     animationController.addStatusListener(
@@ -46,6 +53,7 @@ class _DurationWidgetState extends State<DurationWidget>
   @override
   void didChangeDependencies() {
     _startDuration(widget.duration);
+
     super.didChangeDependencies();
   }
 
@@ -57,8 +65,7 @@ class _DurationWidgetState extends State<DurationWidget>
 
   @override
   Widget build(BuildContext context) {
-    final duration = animationController.duration! * animationController.value;
-
+    
     return AnimatedBuilder(
         animation: animationController,
         builder: (context, _) {
@@ -74,28 +81,16 @@ class _DurationWidgetState extends State<DurationWidget>
     animationController.reverse(from: 1.0);
   }
 
-  //  // Pause - dừng tại vị trí hiện tại
-  // void pause() {
-  //   if (!widget.isPlaying && _controller.isAnimating) {
-  //     _pausedValue = _controller.value;
-  //     _controller.stop();
-  //     _isPaused = true;
-  //   }
-  // }
+  // Pause - dừng tại vị trí hiện tại
+  void pause() {
+    if (widget.isPlaying && animationController.isAnimating) {
+      _pausedValue = animationController.value;
+      animationController.stop();
+    }
+  }
 
-  // // Resume - tiếp tục từ vị trí đã pause
-  // TickerFuture resume() {
-  //   if (widget.isPlaying) {
-      
-      
-  //     // Tính toán duration còn lại
-  //     double remainingProgress = 1.0 - _pausedValue;
-  //     Duration remainingDuration = _originalDuration * remainingProgress;
-      
-  //     // Cập nhật duration và tiếp tục
-  //     _controller.duration = remainingDuration;
-  //     return _controller.forward(from: _pausedValue);
-  //   }
-  //   return TickerFuture.complete();
-  // }
+  // Resume - tiếp tục từ vị trí đã pause
+  void resume() {
+    animationController.reverse(from: _pausedValue);
+  }
 }

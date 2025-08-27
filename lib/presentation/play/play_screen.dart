@@ -13,13 +13,6 @@ class PlayScreen extends GetView<PlayController> {
 
   @override
   Widget build(BuildContext context) {
-    // controller.addListener(
-    //   () {
-    //     if (KeyString.durationKey.currentState!.duration <= Duration.zero) {
-    //       controller.stop();
-    //     }
-    //   },
-    // );
     return Obx(
       () => SafeArea(
         child: Scaffold(
@@ -45,6 +38,11 @@ class PlayScreen extends GetView<PlayController> {
                   duration:
                       Duration(minutes: controller.model.time?.value ?? 0),
                   isPlaying: controller.isPlaying,
+                  stopMusic: (isPlaying) {
+                    if (isPlaying) {
+                      controller.stop();
+                    }
+                  },
                 ),
               ),
               const SizedBox(height: 32),

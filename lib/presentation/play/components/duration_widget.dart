@@ -8,9 +8,11 @@ class DurationWidget extends StatefulWidget {
     super.key,
     this.duration = Duration.zero,
     this.isPlaying = false,
+    this.stopMusic,
   });
   final Duration duration;
   final bool isPlaying;
+  final void Function(bool isPlaying)? stopMusic;
 
   @override
   State<DurationWidget> createState() => DurationWidgetState();
@@ -40,9 +42,11 @@ class DurationWidgetState extends State<DurationWidget>
     animationController.addStatusListener(
       (status) {
         if (!mounted) {
-          if (status.isCompleted || status.isDismissed) {
-            animationController.stop();
-          }
+          return;
+        }
+        if (status == AnimationStatus.dismissed) {
+          widget.stopMusic?.call(widget.isPlaying);
+          animationController.stop();
         }
       },
     );
@@ -65,7 +69,6 @@ class DurationWidgetState extends State<DurationWidget>
 
   @override
   Widget build(BuildContext context) {
-    
     return AnimatedBuilder(
         animation: animationController,
         builder: (context, _) {

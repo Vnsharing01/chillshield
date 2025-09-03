@@ -7,9 +7,13 @@ class AppButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.buttonTile,
+    this.backgroundColor,
+    this.textColor,
   });
   final void Function() onPressed;
   final String buttonTile;
+  final Color? backgroundColor;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -19,13 +23,14 @@ class AppButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        backgroundColor: AppClolors.btnBackground,
+        backgroundColor: backgroundColor ?? AppClolors.btnBackground,
+        elevation: 2,
       ),
       child: Text(
         buttonTile,
         style: AppTextStyle.button(
           fontSize: 24,
-          color: AppClolors.white,
+          color: textColor ?? AppClolors.white,
         ),
       ),
     );

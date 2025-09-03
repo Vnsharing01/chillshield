@@ -1,12 +1,15 @@
 import 'package:chillshield/presentation/play/components/duration_widget.dart';
 import 'package:chillshield/presentation/play/play_controller.dart';
+import 'package:chillshield/routes/route_name.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
+import 'package:chillshield/shared/constants/app_image.dart';
 import 'package:chillshield/shared/constants/key_string.dart';
 import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class PlayScreen extends GetView<PlayController> {
   const PlayScreen({super.key});
@@ -41,6 +44,14 @@ class PlayScreen extends GetView<PlayController> {
                   stopMusic: (isPlaying) {
                     if (isPlaying) {
                       controller.stop();
+                      Future.delayed(const Duration(milliseconds: 300), () {
+                        if (Get.context!.mounted) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => buildDialogfinish(),
+                          );
+                        }
+                      });
                     }
                   },
                 ),
@@ -143,6 +154,64 @@ class PlayScreen extends GetView<PlayController> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget buildDialogfinish() {
+    return Dialog.fullscreen(
+      backgroundColor: AppClolors.background,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Card(
+            margin: const EdgeInsets.all(24),
+            color: AppClolors.selected,
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AppImage.logo,
+                    fit: BoxFit.contain,
+                    height: 100,
+                    width: 100,
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Bạn có muốn tiếp tục?',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyle.title(fontSize: 24),
+                  ),
+                  const SizedBox(height: 20),
+                  AppButton(
+                    onPressed: () {
+                      Get.back();
+                      Future.delayed(
+                        const Duration(milliseconds: 300),
+                        () {
+                          controller.play();
+                          KeyString.durationKey.currentState?.startDuration();
+                        },
+                      );
+                    },
+                    buttonTile: 'Tiếp tục',
+                  ),
+                  const SizedBox(height: 8),
+                  AppButton(
+                    onPressed: () => Get.offNamed(RouteName.home),
+                    buttonTile: 'Trang chủ',
+                    backgroundColor: AppClolors.btnSecondary,
+                    textColor: AppClolors.txtOranage,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -56,7 +56,7 @@ class DurationWidgetState extends State<DurationWidget>
 
   @override
   void didChangeDependencies() {
-    _startDuration(widget.duration);
+    startDuration();
 
     super.didChangeDependencies();
   }
@@ -79,8 +79,8 @@ class DurationWidgetState extends State<DurationWidget>
         });
   }
 
-  void _startDuration(Duration duration) {
-    animationController.duration = duration;
+  void startDuration() {
+    animationController.duration = widget.duration;
     animationController.reverse(from: 1.0);
   }
 

@@ -7,6 +7,7 @@ class AppClolors {
   static const Color background = Color(0xFFE0EEC7);
   static const Color error = Color(0xFFB00020);
   static const Color btnBackground = Color(0xFFE5964F);
+  static const Color btnSecondary = Color(0xFFFFBF6D);
   static const Color selected = Color(0xFFF5FCE2);
   static const Color checkboxBg = Color(0xFFBDD49F);
   static const Color txtMainColor = Color(0xFF437B47);
@@ -15,4 +16,5 @@ class AppClolors {
   static const Color textBlack = Color(0xFF000000);
   static const Color label = Color(0xFF1F4325);
   static const Color buttonDisabled = Color(0xFFD0D5D0);
+  static const Color txtOranage = Color(0xFFA04401);
 }

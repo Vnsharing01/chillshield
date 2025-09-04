@@ -201,7 +201,12 @@ class PlayScreen extends GetView<PlayController> {
                   ),
                   const SizedBox(height: 8),
                   AppButton(
-                    onPressed: () => Get.offNamed(RouteName.home),
+                    onPressed: () {
+                      Get.back();
+                      Get.offAllNamed(
+                        RouteName.home,
+                      );
+                    },
                     buttonTile: 'Trang chủ',
                     backgroundColor: AppClolors.btnSecondary,
                     textColor: AppClolors.txtOranage,

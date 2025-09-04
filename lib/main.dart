@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chillshield/data/local/hive_local_db.dart';
 import 'package:chillshield/data/models/sound_models.dart';
 import 'package:chillshield/routes/app_routes.dart';
@@ -6,6 +8,7 @@ import 'package:chillshield/shared/constants/get_it.dart';
 import 'package:chillshield/shared/constants/key_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,11 +21,13 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(SoundModelsAdapter());
   await Hive.openBox<SoundModels>(KeyString.hiveSound);
-  
+
   final HiveLocalDb hiveLocalDb = HiveLocalDb();
   getIt.registerSingleton<HiveLocalDb>(hiveLocalDb);
 
   await hiveLocalDb.initSound();
+
+  unawaited(MobileAds.instance.initialize()); // Khởi tạo Google Mobile Ads
 
   await Future.delayed(const Duration(seconds: 2));
   runApp(const MyApp());

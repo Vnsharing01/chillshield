@@ -6,6 +6,7 @@ import 'package:chillshield/shared/constants/app_image.dart';
 import 'package:chillshield/shared/constants/key_string.dart';
 import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
+import 'package:chillshield/widgets/ads/ads_widget.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,98 +32,108 @@ class PlayScreen extends GetView<PlayController> {
             elevation: 0,
           ),
           body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 81,
-                backgroundColor: AppClolors.txtMainColor,
-                child: DurationWidget(
-                  key: KeyString.durationKey,
-                  duration:
-                      Duration(minutes: controller.model.time?.value ?? 0),
-                  isPlaying: controller.isPlaying,
-                  stopMusic: (isPlaying) {
-                    if (isPlaying) {
-                      controller.stop();
-                      Future.delayed(const Duration(milliseconds: 300), () {
-                        if (Get.context!.mounted) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => buildDialogfinish(),
-                          );
-                        }
-                      });
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(height: 32),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 54),
-                child: AppButton(
-                  onPressed: () {
-                    if (controller.isPlaying) {
-                      controller.pause();
-                      KeyString.durationKey.currentState?.pause();
-                    } else {
-                      controller.play();
-                      KeyString.durationKey.currentState?.resume();
-                    }
-                  },
-                  buttonTile: controller.isPlaying ? 'Pause' : 'Start',
-                ),
-              ),
-              const SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 16,
-                ),
-                child: Material(
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  color: AppClolors.selected,
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            'Thông tin',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyle.label(
-                              fontSize: 20,
-                              color: AppClolors.label,
-                            ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 81,
+                      backgroundColor: AppClolors.txtMainColor,
+                      child: DurationWidget(
+                        key: KeyString.durationKey,
+                        duration: Duration(
+                            minutes: controller.model.time?.value ?? 0),
+                        isPlaying: controller.isPlaying,
+                        stopMusic: (isPlaying) {
+                          if (isPlaying) {
+                            controller.stop();
+                            Future.delayed(const Duration(milliseconds: 300),
+                                () {
+                              if (Get.context!.mounted) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => buildDialogfinish(),
+                                );
+                              }
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 54),
+                      child: AppButton(
+                        onPressed: () {
+                          if (controller.isPlaying) {
+                            controller.pause();
+                            KeyString.durationKey.currentState?.pause();
+                          } else {
+                            controller.play();
+                            KeyString.durationKey.currentState?.resume();
+                          }
+                        },
+                        buttonTile: controller.isPlaying ? 'Pause' : 'Start',
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 16,
+                      ),
+                      child: Material(
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        color: AppClolors.selected,
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Text(
+                                  'Thông tin',
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyle.label(
+                                    fontSize: 20,
+                                    color: AppClolors.label,
+                                  ),
+                                ),
+                              ),
+                              buildInfoView(
+                                title: 'Côn trùng',
+                                info: '${controller.model.insect?.name}',
+                              ),
+                              buildInfoView(
+                                title: 'Tần số',
+                                info: '${controller.model.frequency?.title}',
+                              ),
+                              buildInfoView(
+                                title: 'Thời gian',
+                                info: '${controller.model.time?.title}',
+                              ),
+                              buildInfoView(
+                                title: 'Nhạc nền',
+                                info:
+                                    '${controller.model.backgroundSound?.displayName}',
+                              ),
+                            ],
                           ),
                         ),
-                        buildInfoView(
-                          title: 'Côn trùng',
-                          info: '${controller.model.insect?.name}',
-                        ),
-                        buildInfoView(
-                          title: 'Tần số',
-                          info: '${controller.model.frequency?.title}',
-                        ),
-                        buildInfoView(
-                          title: 'Thời gian',
-                          info: '${controller.model.time?.title}',
-                        ),
-                        buildInfoView(
-                          title: 'Nhạc nền',
-                          info:
-                              '${controller.model.backgroundSound?.displayName}',
-                        ),
-                      ],
-                    ),
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-              )
+              ),
+              AdsWidget(
+                bannerAd: controller.bannerAd,
+              ),
             ],
           ),
         ),

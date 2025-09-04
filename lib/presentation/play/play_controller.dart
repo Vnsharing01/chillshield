@@ -2,6 +2,7 @@ import 'package:chillshield/data/models/ultrasonic_model.dart';
 import 'package:chillshield/shared/constants/get_it.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:just_audio/just_audio.dart';
 
 class PlayController extends GetxController {
@@ -12,6 +13,8 @@ class PlayController extends GetxController {
   bool get isPlaying => _isPlaying.value;
 
   final audioPlayer = AudioPlayer();
+
+  BannerAd? bannerAd;
 
   @override
   void onInit() {
@@ -60,6 +63,7 @@ class PlayController extends GetxController {
   void onClose() {
     // TODO: implement onClose
     audioPlayer.dispose();
+    bannerAd?.dispose();
     super.onClose();
   }
 }

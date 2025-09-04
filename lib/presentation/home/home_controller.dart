@@ -2,6 +2,7 @@ import 'package:chillshield/shared/enums/duration_enum.dart';
 import 'package:chillshield/shared/enums/frequency_enum.dart';
 import 'package:chillshield/shared/enums/insect_enum.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomeController extends GetxController {
   final RxInt _frequencySelectedValue = FrequencyEnum.none.key.obs;
@@ -11,6 +12,8 @@ class HomeController extends GetxController {
   int get frequencySelectedValue => _frequencySelectedValue.value;
   int get insectSelectedValue => _insectSelectedValue.value;
   int get timeSelectedValue => _timeSelectedValue.value;
+
+  BannerAd? bannerAd;
 
   void setFrequencySelectedValue(int value) {
     _frequencySelectedValue.value = value;
@@ -30,6 +33,7 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     // TODO: implement onClose
+    bannerAd?.dispose();
     super.onClose();
   }
 }

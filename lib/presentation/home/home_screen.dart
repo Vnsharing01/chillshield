@@ -55,16 +55,16 @@ class HomeScreen extends GetWidget<HomeController> {
                     Image.asset(
                       AppImage.logo,
                       fit: BoxFit.contain,
-                      height: 100,
-                      width: 100,
+                      height: 120,
+                      width: 120,
                     ),
                     const SizedBox(height: 16),
                     Column(
                       children: [
                         frequencyWidget(controller),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
                         typeOfInsectWidget(controller),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
                         timeWidget(controller),
                       ],
                     ),

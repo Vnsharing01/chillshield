@@ -4,6 +4,7 @@ import 'package:chillshield/presentation/setting/setting_controller.dart';
 import 'package:chillshield/shared/constants/app_clolors.dart';
 import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
+import 'package:chillshield/widgets/ads_widget.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,71 +26,81 @@ class SettingScreen extends GetView<SettingController> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Card.outlined(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                elevation: 1,
-                color: AppClolors.selected,
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.7,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            ItemInfoWidget(
-                              controller: controller,
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) {
-                                      return _buildAudioPopup();
-                                    });
-                              },
-                              title: 'Âm thanh nền',
-                              icon: Icons.chevron_right_rounded,
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Card.outlined(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    elevation: 1,
+                    color: AppClolors.selected,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                ItemInfoWidget(
+                                  controller: controller,
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (_) {
+                                          return _buildAudioPopup();
+                                        });
+                                  },
+                                  title: 'Âm thanh nền',
+                                  icon: Icons.chevron_right_rounded,
+                                ),
+                                _buildDividerView(),
+                                ItemInfoWidget(
+                                  controller: controller,
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (_) {
+                                          return _buildInfoPopup();
+                                        });
+                                  },
+                                  title: 'App info',
+                                  icon: Icons.info,
+                                ),
+                                _buildDividerView(),
+                                // ItemInfoWidget(
+                                //   controller: controller,
+                                //   onTap: () => controller.shareApp(),
+                                //   title: 'Share App',
+                                //   icon: Icons.share,
+                                // ),
+                                // _buildDividerView(),
+                              ],
                             ),
-                            _buildDividerView(),
-                            ItemInfoWidget(
-                              controller: controller,
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) {
-                                      return _buildInfoPopup();
-                                    });
-                              },
-                              title: 'App info',
-                              icon: Icons.info,
-                            ),
-                            _buildDividerView(),
-                            ItemInfoWidget(
-                              controller: controller,
-                              onTap: () => controller.shareApp(),
-                              title: 'Share App',
-                              icon: Icons.share,
-                            ),
-                            _buildDividerView(),
-                          ],
-                        ),
+                          ),
+                          Text(
+                            'Version 1.0.0',
+                            style: AppTextStyle.label(fontSize: 16),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
                       ),
-                      Text(
-                        'Version 1.0.0',
-                        style: AppTextStyle.label(fontSize: 16),
-                      ),
-                      const SizedBox(height: 16),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Obx(
+              () => AdsWidget(
+                bannerAd: controller.bannerAd,
+                isReadyAds: controller.isAdLoaded,
+              ),
+            ),
+          ],
         ),
       ),
     );

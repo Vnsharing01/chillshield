@@ -10,7 +10,7 @@ import 'package:chillshield/shared/enums/duration_enum.dart';
 import 'package:chillshield/shared/enums/frequency_enum.dart';
 import 'package:chillshield/shared/enums/insect_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
-import 'package:chillshield/widgets/ads/ads_widget.dart';
+import 'package:chillshield/widgets/ads_widget.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:chillshield/widgets/app_icon_button.dart';
 import 'package:chillshield/widgets/checkbox_button.dart';
@@ -50,20 +50,24 @@ class HomeScreen extends GetWidget<HomeController> {
                   vertical: 24,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(
                       AppImage.logo,
                       fit: BoxFit.contain,
-                      // height: 100,
-                      // width: 100,
-                      scale: 2,
+                      height: 100,
+                      width: 100,
                     ),
                     const SizedBox(height: 16),
-                    frequencyWidget(controller),
-                    const SizedBox(height: 16),
-                    typeOfInsectWidget(controller),
-                    const SizedBox(height: 16),
-                    timeWidget(controller),
+                    Column(
+                      children: [
+                        frequencyWidget(controller),
+                        const SizedBox(height: 16),
+                        typeOfInsectWidget(controller),
+                        const SizedBox(height: 16),
+                        timeWidget(controller),
+                      ],
+                    ),
                     const SizedBox(height: 32),
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -113,8 +117,11 @@ class HomeScreen extends GetWidget<HomeController> {
                 ),
               ),
             ),
-            AdsWidget(
-              bannerAd: controller.bannerAd,
+            Obx(
+              () => AdsWidget(
+                bannerAd: controller.bannerAd,
+                isReadyAds: controller.isAdLoaded,
+              ),
             ),
           ],
         ),

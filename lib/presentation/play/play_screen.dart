@@ -6,11 +6,10 @@ import 'package:chillshield/shared/constants/app_image.dart';
 import 'package:chillshield/shared/constants/key_string.dart';
 import 'package:chillshield/shared/enums/background_sound_enum.dart';
 import 'package:chillshield/shared/utils/text_style.dart';
-import 'package:chillshield/widgets/ads/ads_widget.dart';
+import 'package:chillshield/widgets/ads_widget.dart';
 import 'package:chillshield/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class PlayScreen extends GetView<PlayController> {
   const PlayScreen({super.key});
@@ -131,8 +130,11 @@ class PlayScreen extends GetView<PlayController> {
                   ],
                 ),
               ),
-              AdsWidget(
-                bannerAd: controller.bannerAd,
+              Obx(
+                () => AdsWidget(
+                  bannerAd: controller.bannerAd,
+                  isReadyAds: controller.isAdLoaded,
+                ),
               ),
             ],
           ),
